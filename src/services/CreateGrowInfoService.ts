@@ -1,6 +1,6 @@
 import GrowInfo from '../models/GrowInfo'
 import GrowRepository from '../repositories/GrowRepository'
-
+import { getCustomRepository } from 'typeorm'
 interface Request {
   growName: string
   environmentType: string
@@ -9,25 +9,22 @@ interface Request {
 }
 
 class CreateGrowInfoService {
-  private growsRepository: GrowRepository
-
-  constructor (growsRepository: GrowRepository) {
-    this.growsRepository = growsRepository
-  }
-
-  public execute ({
+  public async execute({
     growName,
     environmentType,
     growMedium,
     strainName,
-  }: Request): GrowInfo {
-    const grow = this.growsRepository.create({
+  }: Request): Promise<GrowInfo> {
+    const growRepository = getCustomRepository(GrowRepository)
+
+    const grow = growRepository.create({
       growName,
       environmentType,
       growMedium,
-      strainName,
+      strainName
     })
 
+    await growRepository.save(grow)
     return grow
   }
 }

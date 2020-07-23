@@ -1,36 +1,13 @@
+import { EntityRepository, Repository } from 'typeorm'
 import GrowInfo from '../models/GrowInfo'
 
-interface GrowInfoDTO {
-  growName: string
-  environmentType: string
-  growMedium: string
-  strainName: string
-}
+@EntityRepository(GrowInfo)
+class GrowRepository extends Repository<GrowInfo> {
+  public async findByDate(date: Date): Promise<GrowInfo | null> {
+    const findGrow = await this.findOne({
 
-class GrowRepository {
-  private grows: GrowInfo[]
-
-  constructor () {
-    this.grows = []
-  }
-  public create ({
-    growName,
-    environmentType,
-    growMedium,
-    strainName,
-  }: GrowInfoDTO): GrowInfo {
-    const grow = new GrowInfo({
-      growName,
-      environmentType,
-      growMedium,
-      strainName,
     })
-    this.grows.push(grow)
-    return grow
-  }
-
-  public all (): GrowInfo[] {
-    return this.grows
+    return findGrow || null
   }
 }
 

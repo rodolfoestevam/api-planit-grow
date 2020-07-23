@@ -1,24 +1,20 @@
-import { uuid } from 'uuidv4'
-
+import { Entity, PrimaryGeneratedColumn, Column, Generated } from 'typeorm'
+@Entity('grows')
 class GrowInfo {
+  @PrimaryGeneratedColumn('uuid')
   id: string
-  growName: string
-  environmentType: string
-  growMedium: string
-  strainName: string
 
-  constructor ({
-    growName,
-    environmentType,
-    growMedium,
-    strainName,
-  }: Omit<GrowInfo, 'id'>) {
-    this.id = uuid()
-    this.growName = growName
-    this.environmentType = environmentType
-    this.growMedium = growMedium
-    this.strainName = strainName
-  }
+  @Column()
+  growName: string
+
+  @Column()
+  environmentType: string
+  
+  @Column()
+  growMedium: string
+  
+  @Column()
+  strainName: string
 }
 
 export default GrowInfo
