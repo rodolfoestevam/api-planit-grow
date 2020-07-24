@@ -2,10 +2,12 @@ import { Router } from 'express'
 import GrowRepository from '../repositories/GrowRepository'
 import CreateGrowInfoService from '../services/CreateGrowInfoService'
 import { getCustomRepository } from 'typeorm'
+import ensureAuthenticated from '../middlewares/ensureAuthenticated'
 
 const growRouter = Router()
 // const growRepository = new GrowRepository()
 
+growRouter.use(ensureAuthenticated)
 growRouter.get('/', async (request, response) => {
   const growsRepository = getCustomRepository(GrowRepository)
   const grows = await growsRepository.find()
