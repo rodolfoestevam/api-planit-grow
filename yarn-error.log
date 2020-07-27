@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add @types/node @types/express —-save-dev
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add @typings/express
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/rodolfodealmeida/.zinit/polaris/bin
@@ -14,14 +14,17 @@ Platform:
   darwin x64
 
 Trace: 
-  TypeError [ERR_UNESCAPED_CHARACTERS]: Request path contains unescaped characters
-      at new ClientRequest (_http_client.js:139:13)
-      at Object.request (https.js:309:10)
-      at Request.module.exports.Request.start (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141310:32)
-      at Request.module.exports.Request.end (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:142069:10)
-      at end (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141123:14)
-      at Immediate._onImmediate (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141137:7)
-      at processImmediate (internal/timers.js:439:21)
+  Error: https://registry.yarnpkg.com/@typings%2fexpress: Not found
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:66987:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:140748:22)
+      at Request.emit (events.js:210:5)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141720:10)
+      at Request.emit (events.js:210:5)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141642:12)
+      at Object.onceWrapper (events.js:299:28)
+      at IncomingMessage.emit (events.js:215:7)
+      at endReadableNT (_stream_readable.js:1184:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
 
 npm manifest: 
   {
@@ -32,7 +35,7 @@ npm manifest:
     "scripts": {
       "build": "tsc",
       "dev:server": "ts-node-dev --inspect --ignore-watch node_modules src/server.ts",
-      "start": "ts-node src/index.ts",
+      "start": "ts-node src/server.ts",
       "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
     },
     "devDependencies": {
@@ -54,6 +57,7 @@ npm manifest:
       "typescript": "^3.9.7"
     },
     "dependencies": {
+      "cors": "^2.8.5",
       "pg": "^8.3.0",
       "reflect-metadata": "^0.1.13",
       "ts-node-dev": "^1.0.0-pre.52",
